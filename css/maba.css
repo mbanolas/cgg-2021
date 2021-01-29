@@ -1,0 +1,274 @@
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: black;
+    font-weight: bold;
+    cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-bottom: 3px solid black;
+    
+}
+
+.nav > li > a {
+    padding: 4px 10px;
+}
+
+
+.container{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+
+
+.table>tbody>tr>td{
+    padding: 0px 8px 0px 8px;
+}
+
+/*grocery */
+div.table-label {
+    font-weight: bold;
+    font-size: 20px;
+    border:2px solid gray;
+    /*background-color: blue;*/
+}
+
+
+div.table-label div.floatL.l5{
+    font-weight: bold;
+    font-size: 20px;
+    /*color:white;*/
+}
+
+
+
+/*
+
+td,th {
+    text-align: right;
+}
+
+td.izquierda,th.izquierda {
+    text-align: left;
+}
+
+td.centro,th.centro {
+    text-align:center
+}
+
+table.dataTable tfoot th.sumas{
+    padding-right: 10px;
+}
+
+td.listadoProducto, th.listadoProducto, td.listadoFamilia, th.listadoFamilia,td.listadoProveedor, th.listadoProveedor, td.listadoCliente, th.listadoCliente{
+    text-align: left;
+    
+}
+
+td.derecha, th.derecha,h4.derecha{
+    text-align:right;
+    
+}
+span.derecha{
+    text-align: center;
+}
+
+hr{
+    border-top: 2px solid #d9d9d9
+    
+}
+
+form { 
+    display: inline; 
+    
+} 
+
+#producto{
+    text-align: left;
+    width:350px;
+    //color:red;
+}
+
+.eliminarProducto, .eliminarFamilia,.eliminarProveedor,.eliminarCliente{
+    color:red;
+}
+
+button.close{
+    padding-left:10px;
+    
+}
+
+.listadoProducto{
+    cursor: pointer;
+}
+
+#label_id_productoEliminar, #productoEliminar, #nombreFamiliaEliminar, #nombreProveedorEliminar, #precioEliminar,
+#label_id_familiaEliminar, #familiaEliminar,
+#label_id_proveedorEliminar, #proveedorEliminar,
+#label_id_clienteEliminar, #clienteEliminar,  #empresaEliminar{
+   margin-bottom: 0px; 
+   padding-top:7px;
+   padding-bottom: 0px; 
+   font-weight: 700;
+}
+
+label.titulo{
+    font-weight: 500;
+}
+
+div.DTTT { margin-bottom: 0.5em; float: right; }
+    div.dataTables_wrapper { clear: both; }
+
+    table.dataTable tbody td {
+  padding: 0px 10px 0px 10px; 
+}
+
+.close{
+    font-size: 18px;
+}
+
+table.ticket thead tr th, 
+table.ticket thead tr td,
+table.ticket tbody tr th,
+table.ticket tbody tr td,
+table.ticket tfoot tr th,
+table.ticket tfoot tr td{
+    
+    padding: 0 10px 0 10px;
+}
+
+
+
+.table > tbody > tr > th.ticketTotal{
+    vertical-align: middle;
+}
+
+table{
+    border-color:black;
+}
+
+.ticket > thead > tr > th {
+    border-color:gray;
+}
+
+
+a.btn-primary{
+    color:#ffffff;
+}
+
+.dropdown-menu > li > a :hover {
+    color:#ffffff;
+}
+
+td.cantidad input,td.peso input {
+    text-align: right;
+    background-color: lightyellow;
+    padding-right: 5px;
+}
+
+.destacado{
+    font-size: 20px;
+}
+
+table > tbody > tr >th{
+   
+}
+
+input.cantidad, input.peso, input.precio{
+    text-align: right;
+    background-color: lightyellow;
+    padding-right: 5px;
+}
+
+.box1, .box{
+    padding-left: 0px;
+}
+
+.dropdown-menu > li > a {
+    margin:5px;
+   
+}
+
+
+
+.nuevo.dropdown-toggle.btn-primary, .nuevo.dropdown-toggle.btn-default{
+  //border:2px solid red;  
+}
+
+
+
+
+form.factura{
+    display:table
+       
+}
+
+
+.cambiar{
+    margin-top: 5px;
+    background-color: yellow;
+}
+
+.form-group.caja{
+    margin-bottom: 0px;
+}
+
+.error{
+    color: red;
+}
+
+.submitCaja{
+    margin-top: 10px;
+    margin-bottom:  50px;
+}
+
+#grabarCierreCaja,#mostrarDetalles{
+    margin-top: 10px;
+}
+
+.container.listado{
+    margin-left: 10px;;
+    margin-right: 10px;
+}
+
+ .modal-content-cliente {
+     width: 1100px;
+     margin-left: -300px;
+}
+
+modal-dialog-cliente{
+    padding: -200px
+}
+
+#label_id_cliente{
+    text-align: left;
+}
+
+
+.btn.disabled{
+    cursor:not-allowed;
+    pointer-events: all !important;
+}
+
+table#flex1 tbody{
+    font-size:12px;
+    height: 50px;
+}
+
+
+
+.noFunciona{
+    color:red;
+    font-weight: bold;
+}
+
+.botonNavegador{
+    font-weight: bold;
+    height: 34px;
+    
+}
+
+.form-display-as-box{
+    width: 400px;
+}
+
+*/
