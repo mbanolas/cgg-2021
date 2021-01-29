@@ -316,11 +316,12 @@ class Talleres extends CI_Controller
         $this->pdf->Output("Talleres Socio.pdf", 'D');
     }
 
-    public function formatearTelefono($telefono){
+    public function formatearTelefono($telefono)
+    {
         mensaje($telefono);
         mensaje(strlen($telefono));
-        if(strlen($telefono)!=9) return $telefono;
-        else return substr($telefono,0,3).' '.substr($telefono,3,3).' '.substr($telefono,6);
+        if (strlen($telefono) != 9) return $telefono;
+        else return substr($telefono, 0, 3) . ' ' . substr($telefono, 3, 3) . ' ' . substr($telefono, 6);
     }
 
     public function pdfAsistentes()
@@ -466,11 +467,11 @@ class Talleres extends CI_Controller
             $telefono1 = trim($asistente['telefono_1']);
             $telefono2 = trim($asistente['telefono_2']);
             $telefono = "";
-            $separador="/";
-            if($tipoInforme == 3) {
-                $telefono1=$this->formatearTelefono($telefono1);
-                $telefono2=$this->formatearTelefono($telefono2);
-                $separador=" / ";
+            $separador = "/";
+            if ($tipoInforme == 3) {
+                $telefono1 = $this->formatearTelefono($telefono1);
+                $telefono2 = $this->formatearTelefono($telefono2);
+                $separador = " / ";
             }
             if ($telefono1 && $telefono2) $telefono = $telefono1 . $separador . $telefono2;
             if (!$telefono1 && $telefono2) $telefono = $this->formatearTelefono($telefono2);
@@ -481,11 +482,11 @@ class Talleres extends CI_Controller
             if ($tipoInforme == 3) {
                 // $this->pdf->Cell(60, 5, $asistente['email'], 'BLR', 0, 'L', 0);
                 // $this->pdf->Link(60,5 ,10,10,"maito:".$asistente['email'], 'BLR', 0, 'L', 0);
-                $this->pdf->Cell(60, 5, $asistente['email'], 'BLR', 0, 'L', 0,"mailto:".$asistente['email']);
+                $this->pdf->Cell(60, 5, $asistente['email'], 'BLR', 0, 'L', 0, "mailto:" . $asistente['email']);
                 $this->pdf->Cell(25, 5, $inscrito, 'BLR', 0, 'L', 0);
             } else   $this->pdf->Cell(25, 5, $inscrito, 'BLR', 0, 'L', 0);
 
-            if ($tipoInforme == 1) $this->pdf->Cell(25, 5, $asistente['pagado'] == 0 ? '' : number_format($asistente['pagado'],2) . '   ', 'BLR', 0, 'R', 0);
+            if ($tipoInforme == 1) $this->pdf->Cell(25, 5, $asistente['pagado'] == 0 ? '' : number_format($asistente['pagado'], 2) . '   ', 'BLR', 0, 'R', 0);
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
             $num++;
@@ -499,15 +500,15 @@ class Talleres extends CI_Controller
         // Se imprimen los datos de cada alumno
         $this->pdf->Cell(75, 5, $num, 'TBLR', 0, 'L', 0);
         if ($tipoInforme == 0 || $tipoInforme == 1 || $tipoInforme == 3) $this->pdf->Cell(40, 5, '  ', 'TBLR', 0, 'R', 0);
-       
-        
+
+
 
         if ($tipoInforme == 3) {
             $this->pdf->Cell(60, 5, '  ', 'TBLR', 0, 'R', 0);
             $this->pdf->Cell(25, 5, '  ', 'TBLR', 0, 'R', 0);
         } else    $this->pdf->Cell(25, 5, '  ', 'TBLR', 0, 'R', 0);
 
-        if ($tipoInforme == 1) $this->pdf->Cell(25, 5, number_format($total,2) . '   ', 'TBLR', 0, 'R', 0);
+        if ($tipoInforme == 1) $this->pdf->Cell(25, 5, number_format($total, 2) . '   ', 'TBLR', 0, 'R', 0);
 
         //Se agrega un salto de linea
         $this->pdf->Ln(5);
@@ -1011,14 +1012,15 @@ class Talleres extends CI_Controller
     public function registrarBajasNuevo()
     {
         $datos['inscripcion'] = $this->talleres_model->registrarBajasNuevo();
-
-        $datos['autor'] = 'Miguel Angel Bañolas';
+        mensaje($datos['inscripcion']['resultNuevo']);
+        // $datos['autor'] = 'Miguel Angel Bañolas';
         $datos['titulo'] = $_SESSION['tituloCasal'];
         $this->load->view('templates/header', $datos);
-        $datos['activeMenu'] = 'Talleres';
-        $datos['activeSubmenu'] = 'Inscripciones a talleres';
+        // $datos['activeMenu'] = 'Talleres';
+        // $datos['activeSubmenu'] = 'Inscripciones a talleres';
         $this->load->view('templates/barraNavegacion', $datos);
         $this->load->view('registrarBajasNuevo', $datos);
+        $this->load->view('myModal', $datos);
         $datos['pie'] = '';
         $this->load->view('templates/footer', $datos);
     }
@@ -2061,8 +2063,8 @@ class Talleres extends CI_Controller
             if ($telefono_1 || $telefono_2) $telefono = 'Teléfono: ';
             if ($telefono_1) $telefono .= $telefono_1;
             if ($telefono_2) $telefono .= ' - ' . $telefono_2;
-            $email=$datosSocio->email;
-            $telefono.=' email: '.$email;
+            $email = $datosSocio->email;
+            $telefono .= ' email: ' . $email;
             $tR = "";
             $this->pdf->Cell(0, 6, utf8_decode($telefono), 0, 1, 'L', 0);
             if ($tarjetaRosa) {
@@ -2082,14 +2084,14 @@ class Talleres extends CI_Controller
                 $v = $this->db->query("SELECT nombre_corto FROM casal_talleres WHERE id='$id'")->row()->nombre_corto;
                 $tipo_taller = $this->db->query("SELECT tipo_taller FROM casal_talleres WHERE id='$id'")->row()->tipo_taller;
                 if ($tipo_taller == 'Voluntari' && $trimestres[$k] == 'T1') $trimestres[$k] = 'C';
-                $nombre = $v . " - (" . $trimestres[$k] . ")  " . number_format($importes[$k],2) . " €";
+                $nombre = $v . " - (" . $trimestres[$k] . ")  " . number_format($importes[$k], 2) . " €";
 
                 $this->pdf->SetFont('Arial', '', 14);
                 $v = iconv('UTF-8', 'CP1252', $v);
 
                 $this->pdf->Cell(80, 8, '- ' . $v, $m, 0, 'L');
                 $this->pdf->Cell(15, 8, $trimestres[$k], $m, 0, 'L');
-                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format($importes[$k],2) . ' €'), $m, 0, 'R');
+                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format($importes[$k], 2) . ' €'), $m, 0, 'R');
                 $numLineas++;
 
                 $this->pdf->SetFont('Arial', '', 9);
@@ -2168,9 +2170,15 @@ class Talleres extends CI_Controller
             $this->pdf->Cell(40, 10, utf8_decode('Euros: ' . $totalAPagar), '0', 1, 'L', '0');
 
 
-            if ($cobroTarjeta != 0) {
-                $this->pdf->SetFont('Arial', 'I', 14);
-                $this->pdf->Cell(40, 10, iconv('UTF-8', 'CP1252', '(Metàl.lic: ' . $cobroMetalico . ' €; Targeta: ' . $cobroTarjeta . ' €)'), '0', 0, 'L', '0');
+            $this->pdf->SetFont('Arial', 'I', 14);
+            if ($totalAPagar != 0) {
+
+                if ($cobroTarjeta != 0) {
+                    // $this->pdf->Cell(40, 10, iconv('UTF-8', 'CP1252', '(Metàl.lic: ' . $cobroMetalico . ' €; Targeta: ' . $cobroTarjeta . ' €)'), '0', 0, 'L', '0');
+                    $this->pdf->Cell(40, 10, iconv('UTF-8', 'CP1252', 'Targeta'), '0', 0, 'L', '0');
+                } else {
+                    $this->pdf->Cell(40, 10, iconv('UTF-8', 'CP1252', 'Metàl·lic'), '0', 0, 'L', '0');
+                }
             }
             $this->pdf->SetFont('Arial', '', 10);
             if ($i) $r = " - Casal";
@@ -2350,8 +2358,8 @@ class Talleres extends CI_Controller
             if ($telefono_1 || $telefono_2) $telefono = 'Teléfono: ';
             if ($telefono_1) $telefono .= $telefono_1;
             if ($telefono_2) $telefono .= ' - ' . $telefono_2;
-            $email=$datosSocio->email;
-            $telefono.=' email: '.$email;
+            $email = $datosSocio->email;
+            $telefono .= ' email: ' . $email;
             $tR = "";
             $this->pdf->Cell(0, 6, utf8_decode($telefono), 0, 1, 'L', 0);
             if ($tarjetaRosa) {
@@ -2369,14 +2377,14 @@ class Talleres extends CI_Controller
                 //if(strlen($v)>25) $v=substr($v,0,25)."...";
                 $id = $id_talleres[$k];
                 $v = $this->db->query("SELECT nombre_corto FROM casal_talleres WHERE id='$id'")->row()->nombre_corto;
-                $nombre = $v . " - (" . $trimestres[$k] . ")  " . number_format($importes[$k],2) . " €";
+                $nombre = $v . " - (" . $trimestres[$k] . ")  " . number_format($importes[$k], 2) . " €";
 
                 $this->pdf->SetFont('Arial', '', 14);
                 $v = iconv('UTF-8', 'CP1252', $v);
 
                 $this->pdf->Cell(80, 8, '- ' . $v, $m, 0, 'L');
                 $this->pdf->Cell(15, 8, $trimestres[$k], $m, 0, 'L');
-                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format($importes[$k],2) . ' €'), $m, 0, 'R');
+                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format($importes[$k], 2) . ' €'), $m, 0, 'R');
 
 
                 $this->pdf->SetFont('Arial', '', 9);
@@ -2530,7 +2538,7 @@ class Talleres extends CI_Controller
         $_SESSION['pagado'] = true;
     }
 
-    public function recibosBajas()
+    public function recibosBajas__()
     {
         $CNombres = array();
         $T1Nombres = array();
@@ -2594,7 +2602,7 @@ class Talleres extends CI_Controller
                 //if(strlen($v)>25) $v=substr($v,0,25)."...";
                 $id = $id_talleres[$k];
                 $v = $this->db->query("SELECT nombre_corto FROM casal_talleres WHERE id='$id'")->row()->nombre_corto;
-                $nombre = $v . " - (" . $trimestres[$k] . ")  " . (number_format(-$importes[$k],2)) . " €";
+                $nombre = $v . " - (" . $trimestres[$k] . ")  " . (number_format(-$importes[$k], 2)) . " €";
 
                 $this->pdf->SetFont('Arial', '', 14);
                 $v = iconv('UTF-8', 'CP1252', $v);
@@ -2602,7 +2610,7 @@ class Talleres extends CI_Controller
                 $this->pdf->Cell(80, 8, '- ' . $v, $m, 0, 'L');
                 if ($trimestres[$k] == -1) $trimestres[$k] = "Espera";
                 $this->pdf->Cell(15, 8, $trimestres[$k], $m, 0, 'L');
-                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format(-$importes[$k],2) . ' €'), $m, 0, 'R');
+                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format(-$importes[$k], 2) . ' €'), $m, 0, 'R');
 
                 $this->pdf->SetFont('Arial', '', 9);
 
@@ -2711,6 +2719,18 @@ class Talleres extends CI_Controller
         $T3Nombres = array();
 
         extract($_POST);
+        mensaje('$cobroTarjeta ' . $cobroTarjeta);
+        mensaje('$cobroMetalico ' . $cobroMetalico);
+
+        $pagoTarjeta = false;
+        $pagoMetalico = true;
+        if (abs($cobroTarjeta) == 0) {
+            $pagoMetalico = true;
+            $pagoTarjeta = false;
+        } else {
+            $pagoTarjeta = true;
+            $pagoMetalico = false;
+        }
 
         $id_recibo = $this->db->query("SELECT id FROM `casal_recibos` ORDER BY id DESC LIMIT 1")->row()->id + 1;
         $this->talleres_model->grabarAsistentesTalleresBajasNuevo($resultNuevo, $id_recibo);
@@ -2775,7 +2795,7 @@ class Talleres extends CI_Controller
                 //if(strlen($v)>25) $v=substr($v,0,25)."...";
                 $id = $id_talleres[$k];
                 $v = $this->db->query("SELECT nombre_corto FROM casal_talleres WHERE id='$id'")->row()->nombre_corto;
-                $nombre = $v . " - (" . $trimestres[$k] . ")  " . (number_format(-$importes[$k],2)) . " €";
+                $nombre = $v . " - (" . $trimestres[$k] . ")  " . (number_format(-$importes[$k], 2)) . " €";
 
                 $this->pdf->SetFont('Arial', '', 14);
                 $v = iconv('UTF-8', 'CP1252', $v);
@@ -2783,7 +2803,7 @@ class Talleres extends CI_Controller
                 $this->pdf->Cell(80, 8, '- ' . $v, $m, 0, 'L');
                 if ($trimestres[$k] == -1) $trimestres[$k] = "Espera";
                 $this->pdf->Cell(15, 8, $trimestres[$k], $m, 0, 'L');
-                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format(-$importes[$k],2) . ' €'), $m, 0, 'R');
+                $this->pdf->Cell(20, 8, iconv('UTF-8', 'CP1252', number_format(-$importes[$k], 2) . ' €'), $m, 0, 'R');
 
                 $this->pdf->SetFont('Arial', '', 9);
 
@@ -2821,7 +2841,17 @@ class Talleres extends CI_Controller
             }
 
             $this->pdf->SetFont('Arial', 'BI', 18);
-            $this->pdf->Cell(40, 10, utf8_decode('Euros: ' . $cantidad), '0', 0, 'L', '0');
+            $this->pdf->Cell(40, 10, utf8_decode('Euros: ' . $cantidad), '0', 1, 'L', '0');
+            $this->pdf->SetFont('Arial', 'I', 16);
+            if ($cantidad != 0) {
+                if ($cobroTarjeta != 0) {
+                    // $this->pdf->Cell(40, 10, iconv('UTF-8', 'CP1252', '(Metàl.lic: ' . $cobroMetalico . ' €; Targeta: ' . $cobroTarjeta . ' €)'), '0', 0, 'L', '0');
+                    $this->pdf->Cell(40, 10, iconv('UTF-8', 'CP1252', 'Targeta'), '0', 0, 'L', '0');
+                } else {
+                    $this->pdf->Cell(40, 10, iconv('UTF-8', 'CP1252', 'Metàl·lic'), '0', 0, 'L', '0');
+                }
+            }
+
             $this->pdf->SetFont('Arial', '', 10);
             if ($i) $r = " - Casal";
             else $r = " - Usuari/usuària";
@@ -2855,6 +2885,7 @@ class Talleres extends CI_Controller
         $recibo .= $id_recibo;
         $recibo .= '.pdf';
         $recibo = iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $recibo);
+        mensaje('paso por registrar recibo baja ');
 
         $recibo = utf8_decode($recibo);
         if ($_SESSION['pagado'] == false) {
@@ -2864,8 +2895,9 @@ class Talleres extends CI_Controller
 
             //echo '$datosLineas<br>';
             //var_dump($datosLineas);
-
+            // var_dump($datosLineas);
             foreach ($datosLineas as $k => $v) {
+
                 $this->talleres_model->registrarLineasRecibo(
                     $id_recibo,
                     $socio,
@@ -2873,8 +2905,8 @@ class Talleres extends CI_Controller
                     $v->trimestres,
                     $v->tipo_taller,
                     $v->pagado,
-                    $v->tarjeta,
-                    $v->pagado
+                    $pagoTarjeta ? $v->pagado : 0,
+                    $pagoMetalico ? $v->pagado : 0
                 );
             }
         }
